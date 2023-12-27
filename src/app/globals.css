@@ -2,26 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@layer components {
+  .primary-btn {
+    @apply bg-[#17888F] text-white font-bold px-4 py-2 rounded self-end;
   }
-}
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  .secondary-btn {
+    @apply text-[#17888F] border border-[#17888F] rounded px-4 py-2;
+  }
+
+  .error {
+    @apply bg-red-200 border border-red-400 text-red-600 rounded p-4;
+  }
 }
