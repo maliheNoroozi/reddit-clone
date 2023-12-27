@@ -9,6 +9,7 @@ import {
   PopoverTrigger,
   PopoverContent,
   Avatar,
+  Button,
   Divider,
 } from "@nextui-org/react";
 
@@ -28,10 +29,7 @@ export default function HeaderAuth() {
         session?.user ? (
           <Popover placement="left-start">
             <PopoverTrigger>
-              <Avatar
-                src={session.user.image || ""}
-                className="cursor-pointer"
-              />
+              <Avatar as="button" src={session.user.image || ""} />
             </PopoverTrigger>
             <PopoverContent className="flex flex-col gap-8 p-4">
               <div className="flex flex-col gap-2 items-center">
@@ -40,12 +38,13 @@ export default function HeaderAuth() {
                 <span className="text-gray-400">{session.user.email}</span>
                 <Divider />
               </div>
-              <button
+              <Button
+                variant="light"
                 onClick={() => signOut()}
                 className="text-[#17888F] font-bold"
               >
                 Sign Out
-              </button>
+              </Button>
             </PopoverContent>
           </Popover>
         ) : (
