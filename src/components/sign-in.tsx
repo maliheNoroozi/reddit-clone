@@ -5,8 +5,8 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import GithubSignInButton from "@/components/github-signin-button";
-import GoogleSignInButton from "@/components/google-signin-button";
+import GithubSignInButton from "@/components/Buttons/github-signin-button";
+import GoogleSignInButton from "@/components/Buttons/google-signin-button";
 import Divider from "@/components/divider";
 
 export default function SignIn() {
