@@ -1,17 +1,18 @@
-import CommentCreateForm from "./comment-create-form";
-import type { Comment } from "@prisma/client";
 import Image from "next/image";
-import type { CommentProps } from "@/db/queries/comments";
+import type { Comment, Post } from "@prisma/client";
+import { fetchCommentsByPostId } from "@/db/queries/comments";
+import CommentCreateForm from "./comment-create-form";
 
 interface CommentListItemProps {
   commentId: Comment["id"];
-  comments: CommentProps[];
+  postId: Post["id"];
 }
 
-export default function CommentListItem({
+export default async function CommentListItem({
   commentId,
-  comments,
+  postId,
 }: CommentListItemProps) {
+  const comments = await fetchCommentsByPostId(postId);
   const comment = comments.find((comment) => comment.id === commentId);
   if (!comment) {
     return null;
@@ -45,7 +46,7 @@ export default function CommentListItem({
             <CommentListItem
               key={item.id}
               commentId={item.id}
-              comments={comments}
+              postId={postId}
             />
           ))}
         </div>

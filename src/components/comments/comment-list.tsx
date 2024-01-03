@@ -1,11 +1,12 @@
+import type { Post } from "@prisma/client";
+import { fetchCommentsByPostId } from "@/db/queries/comments";
 import CommentListItem from "./comment-list-item";
-import type { CommentProps } from "@/db/queries/comments";
 
 interface CommentListProps {
-  fetchData: () => Promise<CommentProps[]>;
+  postId: Post["id"];
 }
-export default async function CommentList({ fetchData }: CommentListProps) {
-  const comments = await fetchData();
+export default async function CommentList({ postId }: CommentListProps) {
+  const comments = await fetchCommentsByPostId(postId);
   const filteredComments = comments.filter((item) => item.parentId === null);
 
   return (
@@ -17,7 +18,7 @@ export default async function CommentList({ fetchData }: CommentListProps) {
             <CommentListItem
               key={item.id}
               commentId={item.id}
-              comments={comments}
+              postId={postId}
             />
           ))}
         </div>
