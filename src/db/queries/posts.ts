@@ -49,3 +49,27 @@ export const fetchTopPosts = async (): Promise<PostProps[]> => {
     },
   });
 };
+
+export const searchPosts = async (term: string): Promise<PostProps[]> => {
+  return await db.post.findMany({
+    where: {
+      OR: [
+        {
+          title: { contains: term },
+        },
+        {
+          content: { contains: term },
+        },
+      ],
+    },
+    include: {
+      topic: { select: { slug: true } },
+      user: { select: { name: true } },
+      _count: {
+        select: {
+          comments: true,
+        },
+      },
+    },
+  });
+};

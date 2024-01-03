@@ -8,8 +8,12 @@ interface PostListProps {
 export default async function PostList({ fetchData }: PostListProps) {
   const posts = await fetchData();
 
+  if (posts.length === 0) {
+    return <div>No posts</div>;
+  }
+
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 w-full">
       {posts.map((post) => (
         <PostListItem key={post.id} post={post} />
       ))}
