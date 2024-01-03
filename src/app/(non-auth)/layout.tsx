@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <Header />
-          <main className="h-screen w-screen flex text-[rgb(17, 24, 28)] container mx-auto max-w-8xl">
+          <main className="h-screen w-screen flex text-[rgb(17, 24, 28)] container mx-auto max-w-8xl py-2 px-4">
             {children}
           </main>
         </Providers>

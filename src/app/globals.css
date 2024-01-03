@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  word-break: break-word;
+}
+
 @layer components {
   .primary-btn {
     @apply bg-[#17888F] text-white font-bold px-4 py-2 rounded self-end;

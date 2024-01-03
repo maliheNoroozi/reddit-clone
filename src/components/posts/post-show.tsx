@@ -20,7 +20,7 @@ export default async function PostShow({ postId }: PostShowProps) {
   return (
     <div className="flex flex-col gap-2 p-4">
       <h2 className="text-xl">{post.title}</h2>
-      <p>{post.content}</p>
+      <p className="border border-gray-300 rounded p-4">{post.content}</p>
     </div>
   );
 }
