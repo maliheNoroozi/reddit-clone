@@ -16,7 +16,7 @@ export default function FormPrimaryButton({
       variant="solid"
       type="submit"
       isLoading={pending}
-      className="bg-[#17888F] text-white font-bold py-2 rounded w-full"
+      className="bg-[#17888F] text-white font-bold py-2 rounded self-start"
     >
       {children}
     </Button>

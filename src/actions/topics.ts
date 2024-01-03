@@ -81,3 +81,21 @@ export async function createTopic(
   revalidatePath(path.home());
   redirect(path.topicShow(topic.slug));
 }
+
+export async function deleteTopic(id: string) {
+  const topic = await db.topic.findFirst({
+    where: {
+      id,
+    },
+  });
+
+  if (!topic) {
+    throw new Error("Topic do not exist.");
+  }
+
+  await db.topic.delete({
+    where: {
+      id,
+    },
+  });
+}

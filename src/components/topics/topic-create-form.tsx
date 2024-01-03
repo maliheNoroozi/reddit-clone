@@ -31,7 +31,7 @@ export default function CreateTopicForm() {
       <PopoverContent>
         <form action={formAction}>
           <div className="flex flex-col gap-4 w-96 px-4 py-8">
-            <h1 className="font-bold text-xl">Create a Topic</h1>
+            <h1 className="font-bold text-2xl">Create a Topic</h1>
             <Input
               variant="flat"
               radius="sm"

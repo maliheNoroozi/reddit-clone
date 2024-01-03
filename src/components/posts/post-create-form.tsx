@@ -11,9 +11,10 @@ import {
 import FormPrimaryButton from "../Buttons/form-primary-button";
 import * as actions from "@/actions";
 import { useFormState } from "react-dom";
+import type { Topic } from "@prisma/client";
 
 interface CreatePostFormProps {
-  topicSlug: string;
+  topicSlug: Topic["slug"];
 }
 
 export default function CreatePostForm({ topicSlug }: CreatePostFormProps) {
@@ -38,7 +39,7 @@ export default function CreatePostForm({ topicSlug }: CreatePostFormProps) {
       <PopoverContent>
         <form action={formAction}>
           <div className="flex flex-col gap-4 w-96 px-4 py-8">
-            <h1 className="font-bold text-xl">Create a Post</h1>
+            <h1 className="font-bold text-2xl">Create a Post</h1>
             <Input
               variant="flat"
               radius="sm"

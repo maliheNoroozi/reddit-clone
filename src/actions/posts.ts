@@ -1,13 +1,13 @@
 "use server";
 
 import { z } from "zod";
-import { revalidatePath } from "next/cache";
-import path from "@/path";
 import { getServerSession } from "next-auth";
-import { nextAuthOptions } from "@/auth";
-import { Post, User } from "@prisma/client";
-import { db } from "@/db";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { Post, User } from "@prisma/client";
+import { nextAuthOptions } from "@/auth";
+import { db } from "@/db";
+import path from "@/path";
 
 interface FormState {
   errors: {
@@ -39,11 +39,10 @@ export async function createPost(
   }
 
   const session = await getServerSession(nextAuthOptions);
-
   if (!session || !session.user) {
     return {
       errors: {
-        _form: [""],
+        _form: ["You should be signed in to be able to create a post."],
       },
     };
   }
@@ -86,4 +85,22 @@ export async function createPost(
 
   revalidatePath(path.topicShow(topicSlug));
   redirect(path.postShow(topic.slug, post.id));
+}
+
+export async function deletePost(id: string) {
+  const post = await db.post.findFirst({
+    where: {
+      id,
+    },
+  });
+
+  if (!post) {
+    throw new Error("Post do not exist.");
+  }
+
+  await db.post.delete({
+    where: {
+      id,
+    },
+  });
 }
