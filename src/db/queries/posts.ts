@@ -1,7 +1,7 @@
 import type { Post, Topic, User } from "@prisma/client";
 import { db } from "@/db";
 
-export type PostProps = Pick<Post, "id" | "title" | "content"> & {
+export type PostProps = Post & {
   topic: { slug: Topic["slug"] };
 } & {
   user: { name: User["name"] };
@@ -12,7 +12,7 @@ export type PostProps = Pick<Post, "id" | "title" | "content"> & {
 export const fetchPostsByTopicSlug = async (
   slug: Topic["slug"]
 ): Promise<PostProps[]> => {
-  const posts = await db.post.findMany({
+  return await db.post.findMany({
     where: {
       topic: { slug },
     },
@@ -26,12 +26,18 @@ export const fetchPostsByTopicSlug = async (
       },
     },
   });
-
-  return posts;
 };
 
-export const fetchPosts = async (): Promise<PostProps[]> => {
-  const posts = await db.post.findMany({
+export const fetchTopPosts = async (): Promise<PostProps[]> => {
+  return await db.post.findMany({
+    take: 5,
+    orderBy: [
+      {
+        comments: {
+          _count: "desc",
+        },
+      },
+    ],
     include: {
       topic: { select: { slug: true } },
       user: { select: { name: true } },
@@ -42,6 +48,4 @@ export const fetchPosts = async (): Promise<PostProps[]> => {
       },
     },
   });
-
-  return posts;
 };

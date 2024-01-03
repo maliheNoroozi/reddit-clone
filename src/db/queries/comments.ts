@@ -8,7 +8,7 @@ export type CommentProps = Comment & {
 
 export const fetchCommentsByPostId = cache(
   async (postId: Post["id"]): Promise<CommentProps[]> => {
-    const comments = await db.comment.findMany({
+    return await db.comment.findMany({
       where: {
         postId,
       },
@@ -21,6 +21,5 @@ export const fetchCommentsByPostId = cache(
         },
       },
     });
-    return comments;
   }
 );

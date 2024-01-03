@@ -31,7 +31,7 @@ export default async function TopicDetailsPage({ params }: TopicDetailsProps) {
       <div className="col-span-1 shadow border p-4 flex flex-col gap-4 h-fit">
         <CreatePostForm topicSlug={params.slug} />
         <Divider />
-        <div className="min-h-60 max-h-96 overflow-auto">
+        <div className="min-h-[15rem] max-h-96 overflow-auto">
           <h2 className="font-bold text-xl flex items-center justify-center pb-2">
             {topic.slug}
           </h2>
