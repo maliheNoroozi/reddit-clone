@@ -37,7 +37,7 @@ export default function CommentCreateForm({
         setShowCommentCreateForm(false);
       }
     }
-  }, [formState.success]);
+  }, [formState.success, startOpen]);
 
   return (
     <div className="flex flex-col gap-2">
